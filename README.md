@@ -1,9 +1,13 @@
-#PDO MySQL Login
+Soundtrackistanbul software web site PDO MySQL 
 
-Very Simple PHP Login &amp; Register using PDO MySQL
+Very Simple PHP Login 
 
-![pdo](https://cloud.githubusercontent.com/assets/13184472/15992457/d6f7c5dc-30ee-11e6-844c-958712281490.png)
+Soundtrackistanbul is a music software, VST / AU Plug-ins. This is the website with login - registiration and forget password system. I try make to modern website. You can use this system.
 
-Here, I'm trying to include full login, registration, forgot password system. It's the basic PDO MySQl code. You can make any kind of login, registration system by this code.
+Thank you for read this. 
+www.soundtrackistanbul.com
+www.tuncalicioglu.herokuapp.com
 
-Output Demo: https://youtu.be/SgZNYrz9AWE
+Contact : tuncalicioglu@gmail.com
+
+
