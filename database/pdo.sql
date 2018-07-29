@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `pdo` (
   `id` int(10) NOT NULL,
   `fullname` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(60) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   `secretpin` int(10) NOT NULL

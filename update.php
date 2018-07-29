@@ -8,6 +8,7 @@
 
 		// Getting data from FROM
 		$fullname = $_POST['fullname'];
+		$email = $_POST['email'];
 		$secretpin = $_POST['secretpin'];
 		$password = $_POST['password'];
 		$passwordVarify = $_POST['passwordVarify'];
@@ -17,10 +18,11 @@
 
 		if($errMsg == '') {
 			try {
-		      $sql = "UPDATE pdo SET fullname = :fullname, password = :password, secretpin = :secretpin WHERE username = :username";
+		      $sql = "UPDATE pdo SET fullname = :fullname, email = :email, password = :password, secretpin = :secretpin WHERE username = :username";
 		      $stmt = $connect->prepare($sql);                                  
 		      $stmt->execute(array(
 		        ':fullname' => $fullname,
+		        ':email' => $email,
 		        ':secretpin' => $secretpin,
 		        ':password' => $password,
 		        ':username' => $_SESSION['username']
@@ -60,6 +62,8 @@
 				<form action="" method="post">
 					Fullname <br>
 					<input type="text" name="fullname" value="<?php echo $_SESSION['name']; ?>" autocomplete="off" class="box"/><br /><br />
+					Email <br>
+					<input type="email" required  name="email" placeholder="Email Adress" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ?>" autocomplete="off" class="box"/><br /><br />
 					Username <br>
 					<input type="text" name="username" value="<?php echo $_SESSION['username']; ?>" disabled autocomplete="off" class="box"/><br /><br />
 					Secret Pin <br>

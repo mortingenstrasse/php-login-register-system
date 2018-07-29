@@ -15,7 +15,7 @@
 
 		if($errMsg == '') {
 			try {
-				$stmt = $connect->prepare('SELECT id, fullname, username, password, secretpin FROM pdo WHERE username = :username');
+				$stmt = $connect->prepare('SELECT id, fullname, email, username, password, secretpin FROM pdo WHERE username = :username');
 				$stmt->execute(array(
 					':username' => $username
 					));
@@ -27,6 +27,7 @@
 				else {
 					if($password == $data['password']) {
 						$_SESSION['name'] = $data['fullname'];
+						$_SESSION['email'] = $data['email'];
 						$_SESSION['username'] = $data['username'];
 						$_SESSION['password'] = $data['password'];
 						$_SESSION['secretpin'] = $data['secretpin'];
