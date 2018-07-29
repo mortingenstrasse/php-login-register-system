@@ -11,6 +11,7 @@
 		$password = $_POST['password'];
 		$secretpin = $_POST['secretpin'];
 
+
 		if($fullname == '')
 			$errMsg = 'Enter your fullname';
 		if($email == '')
@@ -39,15 +40,21 @@
 				echo $e->getMessage();
 			}
 		}
+
+
+
 	}
 
 	if(isset($_GET['action']) && $_GET['action'] == 'joined') {
 		$errMsg = 'Registration successfull. Now you can <a href="login.php">login</a>';
 	}
+
 ?>
 
-<html>
+
+<!DOCTYPE html>
 <head><title>Sign Up</title></head>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 	<style>
 	html, body {
 		margin: 1px;
@@ -67,6 +74,13 @@
 background-color: #10A93A;
 
 }
+.box{
+	width: 200px;
+	height: 30px;
+	padding: auto;
+	font-size: 16px;
+}
+
 	</style>
 <body>
 	<div align="center">
@@ -89,7 +103,10 @@ background-color: #10A93A;
 					<input type="password" name="password" placeholder="Password" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>" class="box" /><br/><br />
 					<h4>Secret Pin</h4>
 					<input type="text" name="secretpin" placeholder="Sercter Pin" value="<?php if(isset($_POST['secretpin'])) echo $_POST['secretpin'] ?>" autocomplete="off" class="box"/><br /><br />
+					<div class="g-recaptcha" data-sitekey="6Lf5BGcUAAAAAJUCFx8Sh8IfW0GTL5qXQ6qPdAZM"></div>
 					<input type="submit" name='register' value="Sign Up" class='button'/><br />
+
+
 				</form>
 			</div>
 		</div>

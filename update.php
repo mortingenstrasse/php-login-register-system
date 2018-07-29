@@ -41,7 +41,7 @@
 		$errMsg = 'Successfully updated. <a href="logout.php">Logout</a> and login to see update.';
 ?>
 
-<html>
+<!DOCTYPE html>
 <head><title>Update</title></head>
 	<style>
 	html, body {

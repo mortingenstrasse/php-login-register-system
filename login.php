@@ -46,7 +46,7 @@
 	}
 ?>
 
-<html>
+<!DOCTYPE html>
 <head><title>Login</title></head>
 	<style>
 	html, body {
@@ -80,6 +80,12 @@ background-color: #10A93A;
 .button2:hover{
 background-color: #BC5724;
 
+}
+.box{
+	width: 200px;
+	height: 40px;
+	padding: auto;
+	font-size: 16px;
 }
 	</style>
 <body>

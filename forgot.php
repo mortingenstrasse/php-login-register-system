@@ -31,7 +31,7 @@
 	}
 ?>
 
-<html>
+<!DOCTYPE html>
 <head><title>Forgot Password</title></head>
 	<style>
 	html, body {

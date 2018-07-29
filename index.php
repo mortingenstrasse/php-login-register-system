@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html>
 <head><title>Soundtrackistanbul</title></head>
 	<style>
 	html, body {
