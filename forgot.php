@@ -63,8 +63,8 @@
         <div style="margin: 15px">
             You Should Login / Register to See this Page!
             <br>
-            <a href="login.php">Login</a> <br>
-            <a href="register.php">Register</a> <br>
+            <a href="login.php">Log in</a> <br>
+            <a href="register.php">Sign Up</a> <br>
             <a href="forgot.php">Forgot Password</a><br>
             <a href="index.html">Home Page</a>
         </div>

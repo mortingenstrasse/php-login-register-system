@@ -47,12 +47,26 @@
 ?>
 
 <html>
-<head><title>Register</title></head>
+<head><title>Sign Up</title></head>
 	<style>
 	html, body {
 		margin: 1px;
 		border: 0;
 	}
+	.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.button:hover{
+background-color: #10A93A;
+
+}
 	</style>
 <body>
 	<div align="center">
@@ -62,24 +76,29 @@
 					echo '<div style="color:#FF0000;text-align:center;font-size:17px;">'.$errMsg.'</div>';
 				}
 			?>
-			<div style="background-color:#313131; color:#FFFFFF; padding:10px;"><b>Register</b></div>
+			<div style="background-color:#313131; color:#FFFFFF; padding:10px;"><b>Sign Up</b></div>
 			<div style="margin: 15px">
 				<form action="" method="post">
+					<h4>Full Name</h4>
 					<input type="text" name="fullname" placeholder="Fullname" value="<?php if(isset($_POST['fullname'])) echo $_POST['fullname'] ?>" autocomplete="off" class="box"/><br /><br />
+					<h4>Email</h4>
 					<input type="email" required  name="email" placeholder="Email Adress" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ?>" autocomplete="off" class="box"/><br /><br />
+					<h4>User Name</h4>
 					<input type="text" name="username" placeholder="Username" value="<?php if(isset($_POST['username'])) echo $_POST['username'] ?>" autocomplete="off" class="box"/><br /><br />
+					<h4>Password</h4>
 					<input type="password" name="password" placeholder="Password" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>" class="box" /><br/><br />
+					<h4>Secret Pin</h4>
 					<input type="text" name="secretpin" placeholder="Sercter Pin" value="<?php if(isset($_POST['secretpin'])) echo $_POST['secretpin'] ?>" autocomplete="off" class="box"/><br /><br />
-					<input type="submit" name='register' value="Register" class='submit'/><br />
+					<input type="submit" name='register' value="Sign Up" class='button'/><br />
 				</form>
 			</div>
 		</div>
         <div style="background-color:#313131; color:#FFFFFF; padding:10px;"><b>Soundtrackistanbul Product Download</b></div>
         <div style="margin: 15px">
-            You Should Login / Register to See this Page!
+            You Should Log in /Sign up to See this Page!
             <br>
-            <a href="login.php">Login</a> <br>
-            <a href="register.php">Register</a> <br>
+            <a href="login.php">Log in</a> <br>
+            <a href="register.php">Sign Up</a> <br>
             <a href="forgot.php">Forgot Password</a><br>
             <a href="index.html">Home Page</a>
         </div>
