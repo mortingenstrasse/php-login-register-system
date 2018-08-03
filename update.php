@@ -9,21 +9,19 @@
 		// Getting data from FROM
 		$fullname = $_POST['fullname'];
 		$email = $_POST['email'];
-		$secretpin = $_POST['secretpin'];
-		$password = $_POST['password'];
-		$passwordVarify = $_POST['passwordVarify'];
+		$password = md5($_POST['password']);
+		$passwordVarify = md5($_POST['passwordVarify']);
 
 		if($password != $passwordVarify)
 			$errMsg = 'Password not matched.';
 
 		if($errMsg == '') {
 			try {
-		      $sql = "UPDATE pdo SET fullname = :fullname, email = :email, password = :password, secretpin = :secretpin WHERE username = :username";
+		      $sql = "UPDATE pdo SET fullname = :fullname, email = :email, password = :password  WHERE username = :username";
 		      $stmt = $connect->prepare($sql);                                  
 		      $stmt->execute(array(
 		        ':fullname' => $fullname,
 		        ':email' => $email,
-		        ':secretpin' => $secretpin,
 		        ':password' => $password,
 		        ':username' => $_SESSION['username']
 		      ));
@@ -66,14 +64,14 @@
 					<input type="email" required  name="email" placeholder="Email Adress" value="<?php if(isset($_POST['email'])) echo $_POST['email'] ?>" autocomplete="off" class="box"/><br /><br />
 					Username <br>
 					<input type="text" name="username" value="<?php echo $_SESSION['username']; ?>" disabled autocomplete="off" class="box"/><br /><br />
-					Secret Pin <br>
-					<input type="text" name="secretpin" value="<?php echo $_SESSION['secretpin']; ?>" autocomplete="off" class="box"/><br /><br />
-					<hr>
+			
 					Password <br>
 					<input type="password" name="password" value="<?php echo $_SESSION['password'] ?>" class="box" /><br/><br />
-					Vafify Password <br>
+					Verify Password <br>
 					<input type="password" name="passwordVarify" value="<?php echo $_SESSION['password'] ?>" class="box" /><br/><br />
-					<input type="submit" name='update' value="Update" class='submit'/><br />
+					<input type="submit" name='update' value="Update" class='submit'/>
+<a href="login.php">Cancel</a> <br>
+					<br />
 				</form>
 			</div>
 		</div>

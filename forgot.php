@@ -5,23 +5,26 @@
 		$errMsg = '';
 
 		// Getting data from FROM
-		$secretpin = $_POST['secretpin'];
+		$email = $_POST['email'];
 
-		if(empty($secretpin))
-			$errMsg = 'Please enter your secret pin to view your password.';
+		if(empty($email))
+			$errMsg = 'Please enter your Email to view your password.';
 
 		if($errMsg == '') {
 			try {
-				$stmt = $connect->prepare('SELECT password, secretpin FROM pdo WHERE secretpin = :secretpin');
+				$stmt = $connect->prepare('SELECT password, email FROM pdo WHERE email = :email');
 				$stmt->execute(array(
-					':secretpin' => $secretpin
+					':email' => $email
 					));
 				$data = $stmt->fetch(PDO::FETCH_ASSOC);
-				if($secretpin == $data['secretpin']) {
-					$viewpass = 'Your password is: ' . $data['password'] . '<br><a href="login.php">Login Now</a>';
+				if($email == $data['email']) {
+					$viewpass = $data['password'];
+					$viewpass = md5($viewpass);
+					echo 'Please send this code to info@soundtrackistanbul.com
+					; ' . $viewpass . '<br><a href=mailto:info@soundtrackistanbul.com"">Send Your Code NOW</a>';
 				}
 				else {
-					$errMsg = 'Sercet pin not matched.';
+					$errMsg = 'Email not matched.';
 				}
 			}
 			catch(PDOException $e) {
@@ -47,7 +50,7 @@
 					echo '<div style="color:#FF0000;text-align:center;font-size:17px;">'.$errMsg.'</div>';
 				}
 			?>
-			<div style="background-color:#313131; color:#FFFFFF; padding:10px;"><b>Forgot Password</b></div>
+			<div style="background-color:#313131; color:#FFFFFF; padding:17px;"><b>Forgot Password</b></div>
 			<?php
 				if(isset($viewpass)){
 					echo '<div style="color:#198E35;text-align:center;font-size:17px;margin-top:5px">'.$viewpass.'</div>';
@@ -55,7 +58,7 @@
 			?>
 			<div style="margin: 15px">
 				<form action="" method="post">
-					<input type="text" name="secretpin" placeholder="Secret Pin" autocomplete="off" class="box"/><br /><br />
+					<input type="text" name="email" placeholder="Your Email adress" autocomplete="off" class="box"/><br /><br />
 					<input type="submit" name='forgotpass' value="Check" class='submit'/><br />
 				</form>
 			</div>

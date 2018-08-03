@@ -6,7 +6,7 @@
 
 		// Get data from FORM
 		$username = $_POST['username'];
-		$password = $_POST['password'];
+		$password = md5($_POST['password']);
 
 		if($username == '')
 			$errMsg = 'Enter username';
@@ -15,7 +15,7 @@
 
 		if($errMsg == '') {
 			try {
-				$stmt = $connect->prepare('SELECT id, fullname, email, username, password, secretpin FROM pdo WHERE username = :username');
+				$stmt = $connect->prepare('SELECT id, fullname, email, username, password FROM pdo WHERE username = :username');
 				$stmt->execute(array(
 					':username' => $username
 					));
@@ -25,13 +25,12 @@
 					$errMsg = "User $username not found.";
 				}
 				else {
-					if($password == $data['password']) {
+					if($password == ($data['password'])) {
 						$_SESSION['name'] = $data['fullname'];
 						$_SESSION['email'] = $data['email'];
 						$_SESSION['username'] = $data['username'];
-						$_SESSION['password'] = $data['password'];
-						$_SESSION['secretpin'] = $data['secretpin'];
-
+						$_SESSION['password'] = md5($data['password']);
+						
 						header('Location: dashboard.php');
 						exit;
 					}
@@ -93,7 +92,7 @@ background-color: #BC5724;
 		<div style=" border: solid 1px #006D9C; " align="left">
 			<?php
 				if(isset($errMsg)){
-					echo '<div style="color:#FF0000;text-align:center;font-size:17px;">'.$errMsg.'</div>';
+					echo '<div style="color:#FF0000;text-align:center;font-size:32px;">'.$errMsg.'</div>';
 				}
 			?>
 			<div style="background-color:#313131; color:#FFFFFF; padding:10px;"><b>Login</b></div>

@@ -8,8 +8,8 @@
 		$fullname = $_POST['fullname'];
 		$email = $_POST['email'];
 		$username = $_POST['username'];
-		$password = $_POST['password'];
-		$secretpin = $_POST['secretpin'];
+		$password = md5 ($_POST['password']);
+		$confirm_password = md5($_POST['confirm_password']);
 
 
 		if($fullname == '')
@@ -20,24 +20,39 @@
 			$errMsg = 'Enter username';
 		if($password == '')
 			$errMsg = 'Enter password';
-		if($secretpin == '')
-			$errMsg = 'Enter a sercret pin number';
+		if($confirm_password == '')
+			$errMsg = 'Please type password again';
+		if($password != $confirm_password)
+			$errMsg = 'Password not matched.';
+
+
 
 		if($errMsg == ''){
-			try {
-				$stmt = $connect->prepare('INSERT INTO pdo (fullname, email, username, password, secretpin) VALUES (:fullname, :email, :username, :password, :secretpin)');
-				$stmt->execute(array(
-					':fullname' => $fullname,
-					':email' => $email,
-					':username' => $username,
-					':password' => $password,
-					':secretpin' => $secretpin
-					));
-				header('Location: register.php?action=joined');
-				exit;
-			}
-			catch(PDOException $e) {
-				echo $e->getMessage();
+
+
+			$stmt = $connect->query("SELECT count(*) FROM pdo WHERE email = '".$email."' OR username = '".$username."' ORDER by id DESC");
+			$count = $stmt->fetchColumn();
+			echo "count:".$count;
+
+			if($count==0){
+				try {
+					$stmt = $connect->prepare('INSERT INTO pdo (fullname, email, username, password) VALUES (:fullname, :email, :username, :password)');
+					$stmt->execute(array(
+						':fullname' => $fullname,
+						':email' => $email,
+						':username' => $username,
+						':password' => $password,
+						));
+					header('Location: register.php?action=joined');
+					exit;
+				}
+				catch(PDOException $e) {
+					echo $e->getMessage();
+				}
+			} else{
+				$errMsg = "Username or Email is already taken, Please try again.";
+				echo "<BR>HATA";
+				header('Location: register.php?action=error');
 			}
 		}
 
@@ -48,11 +63,16 @@
 	if(isset($_GET['action']) && $_GET['action'] == 'joined') {
 		$errMsg = 'Registration successfull. Now you can <a href="login.php">login</a>';
 	}
+	if(isset($_GET['action']) && $_GET['action'] == 'error') {
+		$errMsg = 'Username or Email is already taken, Please try again';
+	}
 
 ?>
 
 
 <!DOCTYPE html>
+
+
 <head><title>Sign Up</title></head>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 	<style>
@@ -101,8 +121,8 @@ background-color: #10A93A;
 					<input type="text" name="username" placeholder="Username" value="<?php if(isset($_POST['username'])) echo $_POST['username'] ?>" autocomplete="off" class="box"/><br /><br />
 					<h4>Password</h4>
 					<input type="password" name="password" placeholder="Password" value="<?php if(isset($_POST['password'])) echo $_POST['password'] ?>" class="box" /><br/><br />
-					<h4>Secret Pin</h4>
-					<input type="text" name="secretpin" placeholder="Sercter Pin" value="<?php if(isset($_POST['secretpin'])) echo $_POST['secretpin'] ?>" autocomplete="off" class="box"/><br /><br />
+					<h4>Password Again!</h4>
+					<input type="password" name="confirm_password" placeholder="Password Again!" value="<?php if(isset($_POST['confirm_password'])) echo $_POST['confirm_password'] ?>" autocomplete="off" class="box"/><br /><br />
 					<div class="g-recaptcha" data-sitekey="6Lf5BGcUAAAAAJUCFx8Sh8IfW0GTL5qXQ6qPdAZM"></div>
 					<input type="submit" name='register' value="Sign Up" class='button'/><br />
 
